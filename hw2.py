@@ -74,6 +74,11 @@ for element in input_list:
         result[element] = 1
 print('Наш словарь: ', result)
 # 2
+result = {}
+for element in input_list:
+    result[element] = result.get(element, 0) + 1
+print('Наш словарь: ', result)
+# 3
 c = collections.Counter(input_list)
 print('Counter: ', dict(c))
 print('*' * 150)
