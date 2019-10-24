@@ -74,9 +74,10 @@ def cache_decorator(func):
 
     return inner
 
+
 # TODO: последнее задание: переписать всё с использование пакетов !!!
 
-
+# Добавить main только в самом конце, после объяснения модулей
 if __name__ == '__main__':
     print(is_palindrome.__doc__)
     print(is_palindrome('шалаш'))
