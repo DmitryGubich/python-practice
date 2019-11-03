@@ -42,6 +42,62 @@ def my_decorator(func):
     return wrapper
 
 
+# Пример с обсластью видимости
+test_variable = 'initial global value'
+
+
+def test_function_scopes():
+    """Scopes and Namespaces Example"""
+
+    test_variable = 'initial value inside test function'
+
+    def do_local():
+        # Create variable that is only accessible inside current do_local() function.
+        test_variable = 'local value'
+        return test_variable
+
+    def do_nonlocal():
+        # Address the variable from outer scope and try to change it.
+        nonlocal test_variable
+        test_variable = 'nonlocal value'
+        return test_variable
+
+    def do_global():
+        # Address the variable from very global scope and try to change it.
+        global test_variable
+        test_variable = 'global value'
+        return test_variable
+
+    # On this level currently we have access to local for test_function_scopes() function variable.
+    assert test_variable == 'initial value inside test function'
+
+    # Do local assignment.
+    # It doesn't change global variable and variable from test_function_scopes() scope.
+    do_local()
+    assert test_variable == 'initial value inside test function'
+
+    # Do non local assignment.
+    # It doesn't change global variable but it does change variable
+    # from test_function_scopes() function scope.
+    do_nonlocal()
+    assert test_variable == 'nonlocal value'
+
+    # Do global assignment.
+    # This one changes global variable but doesn't change variable from
+    # test_function_scopes() function scope.
+    do_global()
+    assert test_variable == 'nonlocal value'
+
+
+def test_global_variable_access():
+    """Testing global variable access from within a function"""
+
+    # Global value of test_variable has been already changed by do_global() function in previous
+    # test so let's check that.
+    global test_variable
+    assert test_variable == 'global value'
+
+
 # Написать декоратор, который выводит текст внутренней функции несколько раз.
 def repeat(times):
     """ Повторить вызов times раз, и вернуть среднее значение """
