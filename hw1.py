@@ -70,7 +70,40 @@ print('*' * 150)
 
 # Дополнить фрагмент функционалом: пользователь вводит число n.
 # Если n положительное число, то программа выводит сообщение “Привет” n раз.
-count = int(input('Сколько раз вывести слово "Привет"? '))
-for i in range(count):
-    print('Привет')
-print('*' * 150)
+try:
+    count = int(input('Сколько раз вывести слово "Привет"? '))
+except ValueError:
+    print('Проверьте ввод')
+else:
+    for i in range(count):
+        print('Привет')
+    print('*' * 150)
+
+
+# Написать своё собственное исключение
+class ValueTooSmallError(Exception):
+    """Вызывается, если вводимое значение слишком мало"""
+    pass
+
+
+class ValueTooLargeError(Exception):
+    """Вызывается, если вводимое значение слишком велико"""
+    pass
+
+
+number = 10
+while True:
+    try:
+        i_num = int(input("Введите число: "))
+        if i_num < number:
+            raise ValueTooSmallError
+        elif i_num > number:
+            raise ValueTooLargeError
+        break
+    except ValueTooSmallError:
+        print("Мало, попробуйте ещё!")
+    except ValueTooLargeError:
+        print("Много, попробуйте ещё!")
+    except ValueError:
+        print('Проверьте ввод')
+print("Ура! Вы угадали.")
