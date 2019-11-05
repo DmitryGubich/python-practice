@@ -1,3 +1,4 @@
+# Задания по функциям и декораторам
 import math
 from functools import wraps
 
